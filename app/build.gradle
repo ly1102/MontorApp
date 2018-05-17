@@ -28,6 +28,8 @@ android {
 
 dependencies {
     compile ('com.android.support:support-v4:21.0.3')
+    //手势密码包
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 
     // LeanCloud 基础包
     compile ('cn.leancloud.android:avoscloud-sdk:v4.6.4')

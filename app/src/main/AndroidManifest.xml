@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.cuit.monitorapp.AddInfoActivity"></activity>
+        <activity android:name=".main.cuit.monitorapp.SetGestureActivity"></activity>
     </application>
 
 </manifest>
