@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="ImageId1" type="id"/>
+    <item name="ImageId2" type="id"/>
+    <item name="ImageId3" type="id"/>
+    <item name="VideoId" type="id"/>
+</resources>

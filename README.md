@@ -45,7 +45,6 @@
     - **acl**(ACL) 一个JSON对象，对象权限控制，系统自动创建
     - **createdAt**(Date) 对象被创建的UTC时间，系统自动创建
     - **updateAt**(Date) 对象最后一次被修改的时间，系统自动创建
-    - **usermac**(String, unique) 用户手机的MAC地址
     - **name**(String) 姓名
     - **gender**(String: *man, women*) 性别
     - **id_card**(String) 身份证号码

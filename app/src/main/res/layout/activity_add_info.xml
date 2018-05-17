@@ -1,203 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#eee"
-    android:visibility="visible">
+    android:fadingEdge="vertical"
+    android:scrollbars="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/about_appbar"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Animation.AppCompat.Tooltip">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/about_toolbar"
+        android:background="#eee"
+        android:orientation="vertical"
+        android:visibility="visible">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/about_appbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#33b5f2">
-            <ImageButton
-                android:id="@+id/back_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/back"
-                android:background="@android:color/transparent"
-                android:tint="#FFF"
-                android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:theme="@style/Animation.AppCompat.Tooltip">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/about_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#33b5f2">
+
+                <ImageButton
+                    android:id="@+id/back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/back"
+                    android:tint="#FFF" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="添加活动信息"
+                    android:textColor="#ffffff"
+                    android:textSize="18dip" />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="添加活动信息"
-                android:textColor="#ffffff"
-                android:textSize="18dip"/>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxHeight="30sp"
-            android:text="文字信息"
-            android:textColor="#000"
-            android:textSize="18sp" />
+                android:maxHeight="30sp"
+                android:text="文字信息"
+                android:textColor="#000"
+                android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_edittext"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:maxHeight="40sp"
-            android:textColor="#aefaee"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="上传图片或视频"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:id="@+id/local_choose_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="从本地选择" />
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:id="@+id/shoot_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="点击下方按钮拍照上传" />
+            <EditText
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/bg_edittext"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:maxHeight="80dp"
+                android:minHeight="60dp"
+                android:textColor="#aefaee"
+                android:textSize="18sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/img1"
-                android:layout_width="wrap_content"
-                android:minWidth="60sp"
-                android:minHeight="80sp"
-                android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="上传图片或视频"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/shoot_btn"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="点击下方按钮拍照上传" />
+
+                <Button
+                    android:id="@+id/local_choose_btn"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="从本地选择" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/image_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="点击拍照"
+                    android:minHeight="80dp"
+                    android:minWidth="60dp"
+                    app:srcCompat="@android:drawable/ic_input_add"
+                    android:adjustViewBounds="true"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="点击下方图片视频" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击选择视频上传"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+            <VideoView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
                 app:srcCompat="@android:drawable/ic_input_add"
-                android:contentDescription="点击拍照" />
-            <ImageView
-                android:id="@+id/img2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="60sp"
-                android:minHeight="80sp"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_input_add" />
-            <ImageView
-                android:id="@+id/img3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="60sp"
-                android:minHeight="80sp"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_input_add" />
+                />
         </LinearLayout>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dip"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView3"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="添加位置"
-            android:textColor="#000"
-            android:textSize="18sp" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="添加位置"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/gps_btn"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="使用本机当前经纬度" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10sp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginStart="5sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:ems="10"
+                    android:hint="经度"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="5dp"
+                    android:textColor="#000" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginStart="5sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:ems="10"
+                    android:hint="纬度"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="5dp"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <Button
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:id="@+id/gps_btn"
+            android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:text="使用本机当前经纬度" />
+            android:layout_marginBottom="10sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5sp"
+            android:background="#2a3"
+            android:text="提交"
+            android:textColor="#eee"
+            android:textSize="18sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="wrap_content"
-                android:layout_height="30dip"
-                android:layout_weight="1"
-                android:background="@drawable/bg_edittext"
-                android:ems="10"
-                android:layout_marginStart="5sp"
-                android:layout_marginEnd="5sp"
-                android:hint="经度"
-                android:inputType="numberDecimal"
-                android:paddingStart="5dp"
-                android:textColor="#000" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="30dip"
-                android:layout_marginEnd="5sp"
-                android:layout_marginStart="5sp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_edittext"
-                android:ems="10"
-                android:hint="纬度"
-                android:inputType="numberDecimal"
-                android:paddingStart="5dp"
-                android:textColor="#000" />
-        </LinearLayout>
 
     </LinearLayout>
+</ScrollView>
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginBottom="10sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2a3"
-        android:textColor="#eee"
-        android:textSize="18sp"
-        android:layout_marginTop="20sp"
-        android:text="提交" />
-
-
-</LinearLayout>
