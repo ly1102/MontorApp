@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">MonitorApp</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_login">登录/注册</string>
+    <string name="prompt_email">请输入你的邮箱</string>
+    <string name="prompt_password">请输入你的密码</string>
+    <string name="action_sign_in">登录/注册</string>
+    <string name="action_sign_in_short">您的用户名太短了！</string>
+    <string name="error_invalid_email">您的邮箱地址不正确！</string>
+    <string name="error_invalid_password">您输入的密码太短了。</string>
+    <string name="error_incorrect_password">您输入的密码错误！</string>
+    <string name="error_field_required">这个是必填！</string>
+    <string name="permission_rationale">"提供电子邮件完成需要联系人权限。"</string>
 </resources>
