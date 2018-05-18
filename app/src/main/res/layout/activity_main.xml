@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".main.cuit.monitorapp.MainActivity">
 
+    <ImageView
+        android:id="@+id/main-image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:src="@drawable/logo"
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="@string/main_backgrounc_image" />
+
 </android.support.constraint.ConstraintLayout>
