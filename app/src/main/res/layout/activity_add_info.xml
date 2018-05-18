@@ -129,8 +129,7 @@
                     android:contentDescription="点击拍照"
                     android:minHeight="80dp"
                     android:minWidth="60dp"
-                    app:srcCompat="@android:drawable/ic_input_add"
-                    android:adjustViewBounds="true"/>
+                    app:srcCompat="@mipmap/add"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -144,17 +143,22 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="点击下方图片视频" />
+                android:text="选择视频上传" />
             <Button
+                android:id="@+id/video_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击选择视频上传"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
-            <VideoView
+            <ImageView
+                android:id="@+id/video_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="30dp"
-                app:srcCompat="@android:drawable/ic_input_add"
+                android:layout_weight="1"
+                android:minWidth="80dp"
+                android:maxWidth="100dp"
+                app:srcCompat="@mipmap/add"
+                android:adjustViewBounds="true"
                 />
         </LinearLayout>
 

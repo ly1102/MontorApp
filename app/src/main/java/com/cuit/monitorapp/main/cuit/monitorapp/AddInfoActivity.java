@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.Image;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -22,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.cuit.monitorapp.R;
 
@@ -30,14 +33,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class AddInfoActivity extends AppCompatActivity {
-    public static final int TAKE_PHOTO = 111;
+
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
     private ImageView mImageView;
     private Button choose_img_btn;
     private LinearLayout img_parent;
-    private ImageView new_img_view;
-    private String image_path;
+    private Button video_btn;
+    private ImageView videoView;
 
     @android.support.annotation.IdRes
     public int ImageId1 = 1;
@@ -55,13 +58,11 @@ public class AddInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_info);
-        Toast.makeText(getApplicationContext(), "默认Toast样式",
-                Toast.LENGTH_SHORT).show();
         mImageView = findViewById(R.id.img);
         choose_img_btn = findViewById(R.id.local_choose_btn);
         img_parent = findViewById(R.id.image_parent);
-
-        show_count();
+        video_btn = findViewById(R.id.video_btn);
+        videoView = findViewById(R.id.video_view);
 
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +79,17 @@ public class AddInfoActivity extends AppCompatActivity {
                 local.setType("image/*");
                 local.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(local, 2);
+            }
+        });
+
+        video_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                permission(video_btn);
+                Intent local = new Intent();
+                local.setType("video/*");
+                local.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(local, 3);
             }
         });
 
@@ -108,14 +120,14 @@ public class AddInfoActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "权限来啦~！！！",
                 Toast.LENGTH_SHORT).show();
     }
-    public void show_count(){
-        Toast.makeText(getApplicationContext(), "imgView:"+img_parent.getChildCount(),
-                Toast.LENGTH_SHORT).show();
-    }
+
+
     public void takePhoto() {
         Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(captureIntent, 1);
     }
+
+
     public ImageView setId(ImageView imageView, int IdCount){
         switch (IdCount){
             case 1:
@@ -137,6 +149,7 @@ public class AddInfoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         String srcPath = null;
         if (resultCode == RESULT_OK) {
+
             int child_count = img_parent.getChildCount();
             ImageView new_view = new ImageView(img_parent.getContext());
             if(child_count==3) img_parent.removeView(mImageView);
@@ -146,12 +159,14 @@ public class AddInfoActivity extends AppCompatActivity {
             new_view.setAdjustViewBounds(true);
             new_view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
+
             switch (requestCode) {
                 case 1:
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     //拿到bitmap，做喜欢做的事情把  ---> 显示 or上传？
                     new_view.setImageBitmap(bitmap);
                     img_parent.addView(new_view, child_count-1);
+                    mImageView.setAdjustViewBounds(true);
                     break;
                 case 2:
                     Uri uri = data.getData();
@@ -178,7 +193,39 @@ public class AddInfoActivity extends AppCompatActivity {
                     }
                     new_view.setImageURI(uri);
                     img_parent.addView(new_view, child_count-1);
+                    mImageView.setAdjustViewBounds(true);
                     break;
+                case 3:
+                    Uri uri3 = data.getData();
+                    ContentResolver cr3 = this.getContentResolver();
+                    try {
+                        Cursor c = cr3.query(uri3, null, null, null, null);
+                        if (c != null){
+                            c.moveToFirst();
+                            srcPath = c.getString(c.getColumnIndex("_data"));
+                            Log.i("save", "onActivityResult: "+srcPath);
+                        }
+
+                        //这是获取的图片保存在sdcard中的位置
+
+                        if (srcPath == null){
+                            Log.e("user ", "onActivityResult: user xiaomi's method");
+                            uri3 = geturi(this.getIntent(), uri3);
+                        }
+                        System.out.println(srcPath+"----------保存路径2");
+                    }catch (Exception e){
+
+                        Log.e("cursor", "onActivityResult: cursor error occurred"+e);
+                        e.printStackTrace();
+                    }
+                    MediaMetadataRetriever media = new MediaMetadataRetriever();
+
+                    media.setDataSource(videoView.getContext(), uri3);
+
+
+                    Bitmap bitmap2 = media.getFrameAtTime();
+                    videoView.setImageBitmap(bitmap2);
+
                 default:
                     break;
             }
@@ -206,8 +253,7 @@ public class AddInfoActivity extends AppCompatActivity {
 
     // 把绝对路径转换成content开头的URI
     public Uri geturi(android.content.Intent intent, Uri uri) {
-        String type = intent.getType();
-//        if (type != null)
+
         if (uri.getScheme().equals("file")) {
             String path = uri.getEncodedPath();
             if (path != null) {
