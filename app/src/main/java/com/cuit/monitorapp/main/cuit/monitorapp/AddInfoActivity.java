@@ -35,7 +35,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVOSCloud;
@@ -43,13 +42,11 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.cuit.monitorapp.R;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
 import static android.widget.Toast.LENGTH_LONG;
 
 
@@ -74,12 +71,7 @@ public class AddInfoActivity extends AppCompatActivity {
     private int progress, bitmap_count=0, video_count=0;
     private String content_text;
     private Date date = new Date();
-    @android.support.annotation.IdRes
-    public int ImageId1 = 1;
-    public int ImageID2 = 2;
-    public int ImageID3 = 3;
 
-    private int current_file_count = 0, total_file_count = 0;
 
     @SuppressLint("HandlerLeak")
     private Handler handler =new Handler(){
@@ -175,9 +167,11 @@ public class AddInfoActivity extends AppCompatActivity {
         content_edit = findViewById(R.id.content);
 
 
-        Intent start_intent = new Intent(this, AddInfoActivity.class);
+        Intent start_intent = getIntent();
         user_id = start_intent.getStringExtra("user_id");
         follower_id = start_intent.getStringExtra("follower_id");
+
+        Log.i("add info follower_id", "onCreate: " + follower_id);
 
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -518,7 +512,6 @@ public class AddInfoActivity extends AppCompatActivity {
         return uri;
     }
 
-
     public void submit_info(View view) {
 
         bitmap_count = 0;
@@ -553,9 +546,6 @@ public class AddInfoActivity extends AppCompatActivity {
         if (video_path != null)
             video_count += 1;
 
-        date.getTime();
-
-        total_file_count= current_file_count = bitmap_count + video_count;
         Log.d("nummmmm", "submit_info: "+bitmap_count+"    "+video_count);
         Log.i("waitttttt", "submit_info: wait upload");
 
@@ -692,7 +682,7 @@ public class AddInfoActivity extends AppCompatActivity {
 
     public void upload_video_pic(){
         dialog_progress.setMessage("正在准备上传视频文件");
-        final AVFile avFile0 = new AVFile(user_id + follower_id + date.toString() + "pic1", bitmap3);
+        final AVFile avFile0 = new AVFile(user_id + follower_id + date.toString() + "pic1", bitmap4);
         avFile0.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
@@ -768,12 +758,12 @@ public class AddInfoActivity extends AppCompatActivity {
         date.getTime();
 
         AVObject new_info = new AVObject("records");
-        new_info.put("user_id", "123456");
-        new_info.put("follower_id", "123456");
+        new_info.put("user_id", user_id);
+        new_info.put("follower_id", follower_id);
         new_info.put("content", content_text);
         new_info.put("longitude", longitude_double);
         new_info.put("latitude", latitude_double);
-        new_info.put("ctime", date.getTime());
+        new_info.put("ctime", date.getTime()/1000);
         if (pic1_url != null)
             new_info.put("pic1", pic1_url);
         if (pic2_url != null)

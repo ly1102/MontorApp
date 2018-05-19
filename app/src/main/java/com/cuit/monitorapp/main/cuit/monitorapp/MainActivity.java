@@ -1,109 +1,96 @@
 package com.cuit.monitorapp.main.cuit.monitorapp;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ShareCompat;
-import android.support.v4.content.ContextCompat;
+import android.os.Handler;
+import android.os.Message;
+import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.DeleteCallback;
+import com.avos.avoscloud.FindCallback;
 import com.cuit.monitorapp.R;
-import com.cuit.monitorapp.main.cuit.monitorapp.AddInfoActivity;
+
+import java.lang.ref.WeakReference;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
+    private static final int REFRESH_DATA = 0x100;
+    private static final int DELETE_DATA = 0x101;
+    private FollowListAdapter adapter;
+    private Handler mHandler = new MyHandler(this);
+    private LinkedList<AVObject> dataSource = new LinkedList<>();
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    private class MyHandler extends Handler {
+        private final WeakReference<MainActivity> mActivity;
+
+        public MyHandler(MainActivity activity) {
+            super();
+            mActivity = new WeakReference<MainActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case REFRESH_DATA:
+                    adapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+                    break;
+                case DELETE_DATA:
+                    adapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AVOSCloud.initialize(this, "fQeWhHtqk7fB9aVWwm6BAJOF-gzGzoHsz", "uvGmN110krfVFgxP9Cr8B6fv");
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        final Button add_btn = findViewById(R.id.add_btn);
-        add_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("data", "mainActivity");
-                intent.putExtra("user_id", "123456");
-                intent.putExtra("follower_id", "123456");
-                intent.setClass(MainActivity.this, AddInfoActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
+//        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//        intent.getStringExtra("");
+        Log.i("   fff", "onCreate: create main");
+        Intent intent = new Intent();
 
-        findViewById(R.id.test_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                testCall(add_btn);
-            }
-        });
-    }
-
-    public void testCall(View view) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CALL_PHONE},
-                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
+        if (isLogin()) {
+            intent.setClass(this, SetGestureActivity.class);
+            intent.putExtra("activityNum", 0);
+            startActivityForResult(intent, 1);
         } else {
-            callPhone();
+            intent.setClass(this, LoginActivity.class);
+            startActivityForResult(intent, 1);
         }
+
     }
 
-    public void callPhone() {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        Uri data = Uri.parse("tel:" + "10086");
-        intent.setData(data);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        startActivity(intent);
+
+    private boolean isLogin() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPreferences.getBoolean("login", false);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
-    {
-
-        if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE)
-        {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                callPhone();
-            } else
-            {
-                // Permission Denied
-                Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 }
