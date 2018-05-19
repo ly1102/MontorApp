@@ -81,9 +81,9 @@ public class TraceActivity extends AppCompatActivity {
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent intent = new Intent(TraceActivity.this, LocationActivity.class);
-                // startActivityForResult(intent, 1);
-                // intent.putExtra("follower_id", follower_id);
+                Intent intent = new Intent(TraceActivity.this, LocationActivity.class);
+                startActivityForResult(intent, 1);
+                intent.putExtra("follower_id", follower_id);
             }
         });
         rvTrace = (RecyclerView) findViewById(R.id.rvTrace);
@@ -96,10 +96,10 @@ public class TraceActivity extends AppCompatActivity {
             initData(follower_id, user_id);
         }
 
-        if (requestCode == 1 && resultCode == 0) {//可以不要?
-            // Bundle bundle = data.getExtras();
-            // 茶数据库
-        }
+        // if (requestCode == 1 && resultCode == 0) {//可以不要?
+        //     // Bundle bundle = data.getExtras();
+        //     // 茶数据库
+        // }
     }
 
     private void initData(String follower_id, String user_id) { //茶数据库
