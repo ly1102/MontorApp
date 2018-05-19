@@ -101,7 +101,7 @@ public class AddInfoActivity extends AppCompatActivity {
 
             if(msg.what == 2){
                 Log.i("upload", "handleMessage: upload pic2");
-                if(bitmap_count>1){
+                if(bitmap_count>2){
                     upload_pic3();
                 }else if(video_count != 0){
                     upload_video_pic();
@@ -217,14 +217,7 @@ public class AddInfoActivity extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String status = submit_info(submit_btn);
-                Log.i("status", "onClick: " + status);
-                if (status != null) {
-                    Log.i("finish", "onClick: finish");
-                    finishActivity(1);
-                    Log.i("finish2", "onClick: finish2");
-                    finish();
-                }
+                submit_info(submit_btn);
             }
         });
 
@@ -268,7 +261,7 @@ public class AddInfoActivity extends AppCompatActivity {
     }
 
     public void callPhone() {
-        Toast.makeText(getApplicationContext(), "权限来啦~！！！",
+        Toast.makeText(getApplicationContext(), "已获取授权",
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -377,28 +370,18 @@ public class AddInfoActivity extends AppCompatActivity {
                 case 2:
                     Uri uri = data.getData();
                     ContentResolver cr = this.getContentResolver();
-                    try {
-                        Cursor c = cr.query(uri, null, null, null, null);
-                        if (c != null) {
-                            c.moveToFirst();
-                            srcPath = c.getString(c.getColumnIndex("_data"));
-                            Log.i("save", "onActivityResult: " + srcPath);
-                        }
-                        //这是获取的图片保存在sdcard中的位置
-                        if (srcPath == null) {
-                            Log.e("user ", "onActivityResult: user xiaomi's method");
-                            uri = geturi(this.getIntent(), uri, "image");
-                        }
-                        System.out.println(srcPath + "----------保存路径2");
-                    } catch (Exception e) {
-                        Log.e("cursor", "onActivityResult: cursor error occurred" + e);
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        System.out.println(srcPath + "----------保存路径2");
+//                    } catch (Exception e) {
+//                        Log.e("cursor", "onActivityResult: cursor error occurred" + e);
+//                        e.printStackTrace();
+//                    }
                     new_view.setImageURI(uri);
                     Bitmap bitmap5 = getBitmapFromUri(uri);
                     if (bitmap5 == null) {
                         Log.e("no bitmap", "onActivityResult: GET file error!!");
                     }
+                    Log.i("get bit map", "onActivityResult: get the bitmap");
                     switch (child_count) {
                         case 1:
                             bitmap1 = bitmap_to_bytes(bitmap5);
@@ -536,7 +519,7 @@ public class AddInfoActivity extends AppCompatActivity {
     }
 
 
-    public String submit_info(View view) {
+    public void submit_info(View view) {
 
         bitmap_count = 0;
         video_count = 0;
@@ -547,18 +530,18 @@ public class AddInfoActivity extends AppCompatActivity {
 
         if (content_text.length() == 0) {
             show_alert("备注信息是必填项！");
-            return null;
+            return;
         }
         if (longitude_string.equals("") || latitude_string.equals("")) {
             show_alert("经纬度是必填项！");
-            return null;
+            return;
         }
         try {
             longitude_double = Double.valueOf(longitude_string);
             latitude_double = Double.valueOf(latitude_string);
         } catch (Exception e) {
             show_alert("经纬度必须是小数或者整数");
-            return null;
+            return;
         }
 
         if (bitmap1 != null)
@@ -575,86 +558,39 @@ public class AddInfoActivity extends AppCompatActivity {
         total_file_count= current_file_count = bitmap_count + video_count;
         Log.d("nummmmm", "submit_info: "+bitmap_count+"    "+video_count);
         Log.i("waitttttt", "submit_info: wait upload");
-        if (bitmap_count != 0 || video_count != 0) {
-            dialog_progress = new ProgressDialog(this);
-            // 设置进度条风格，风格为圆形，旋转的
-            dialog_progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            // 设置ProgressDialog 标题
-            dialog_progress.setTitle("上传中，请稍后");
-            // 设置ProgressDialog提示信息
-            dialog_progress.setMessage("文件上传中，请稍后...");
 
-            // 设置ProgressDialog 的进度条是否不明确 false 就是不设置为不明确
-            dialog_progress.setIndeterminate(true);
-            dialog_progress.setProgress(1);
-            // 设置ProgressDialog 是否可以按退回键取消
-            dialog_progress.setCancelable(true);
-            // 设置ProgressDialog 的一个Button
-            //dialog_progress.setButton("取消");
-            // 让ProgressDialog显示
+        dialog_progress = new ProgressDialog(this);
+        // 设置进度条风格，风格为圆形，旋转的
+        dialog_progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        // 设置ProgressDialog 标题
+        dialog_progress.setTitle("上传中，请稍后");
+        // 设置ProgressDialog提示信息
+        dialog_progress.setMessage("文件上传中，请稍后...");
+
+        // 设置ProgressDialog 的进度条是否不明确 false 就是不设置为不明确
+        dialog_progress.setIndeterminate(true);
+        dialog_progress.setProgress(1);
+        // 设置ProgressDialog 是否可以按退回键取消
+        dialog_progress.setCancelable(true);
+        // 设置ProgressDialog 的一个Button
+//        dialog_progress.setButton("取消");
+        // 让ProgressDialog显示
 //            Toast.makeText(this, "show progress dialog", Toast.LENGTH_SHORT).show();
-            dialog_progress.show();
-        } else {
-            Toast.makeText(this, "没显示进度条呢", Toast.LENGTH_SHORT).show();
-        }
+        dialog_progress.show();
 
         Log.e("time", "submit_info: " + date.toString() + "---" + String.valueOf(date.getTime()));
 
         if (bitmap_count == 0 && video_count != 0) {
             upload_video_pic();
-        }else{
+        }
+        if(bitmap_count != 0){
             upload_pic1();
         }
-
-
-
-//        while (true) {
-//            Log.i("progress", "submit_info: progress: "+progress);
-//            if (bitmap_count == 0 && video_count == 0) break;
-//            Boolean video_status = check_video_finish(video_count);
-//
-//            if (!video_status) return null;
-//            if (bitmap_count == 1) {
-//                if (status1 != null) {
-//                    if (!status1) {
-//                        Toast.makeText(this, "上传图片失败！", Toast.LENGTH_SHORT).show();
-//                        return null;
-//                    } else {
-//                        break;
-//                    }
-//
-//                }
-//            }
-//            if (bitmap_count == 2) {
-//                if (status1 != null && status2 != null) {
-//                    if (!status1 || !status2) {
-//                        Toast.makeText(this, "上传图片失败！", Toast.LENGTH_SHORT).show();
-//                        return null;
-//                    } else {
-//                        break;
-//                    }
-//
-//                }
-//            }
-//            if (bitmap_count == 3) {
-//                if (status1 != null && status2 != null && status3 != null) {
-//                    if (!status1 || !status2 || status3) {
-//                        Toast.makeText(this, "上传图片失败！", Toast.LENGTH_SHORT).show();
-//                        return null;
-//                    } else {
-//                        break;
-//
-//                    }
-//                }
-//            }
-//        }
-
-//        if (bitmap_count != 0 || video_count != 0)
-//            dialog_progress.dismiss();
+        if(bitmap_count ==0 && video_count ==0){
+            upload_info();
+        }
 
         Log.i("waittttt", "submit_info: wait last upload");
-
-        return null;
     }
 
     public void upload_pic1(){
