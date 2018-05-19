@@ -112,7 +112,7 @@ public class TraceActivity extends AppCompatActivity {
     private void initData(String follower_id, String user_id) { //茶数据库
         AVQuery<AVObject> query = new AVQuery<>("records");
         // query.whereEqualTo("follower_id", AVObject.createWithoutData("records", follower_id));
-        query.whereEqualTo("user_id", user_id);
+//        query.whereEqualTo("user_id", user_id);
         query.whereEqualTo("follower_id", follower_id);
         query.orderByDescending("ctime");
         query.findInBackground(new FindCallback<AVObject>() {
