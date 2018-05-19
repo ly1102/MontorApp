@@ -59,10 +59,10 @@ public class TraceActivity extends AppCompatActivity {
         // });
 
         Intent intent = getIntent();
-        // user_id = ((Auth)getApplication()).getObjectId();
-        user_id = "123456";
-        // follower_id = intent.getStringExtra("follower_id");
-        follower_id = "123456";
+        user_id = ((Auth)getApplication()).getObjectId();
+        // user_id = "123456";
+        follower_id = intent.getStringExtra("follower_id");
+        // follower_id = "123456";
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
