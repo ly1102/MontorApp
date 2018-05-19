@@ -36,8 +36,8 @@ public class TraceActivity extends AppCompatActivity {
     private Button btnShow;
     private String user_id;
     private String follower_id;
-    private long longitude;
-    private long latitude;
+    // private long longitude;
+    // private long latitude;
 
 
     @Override
@@ -92,9 +92,9 @@ public class TraceActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0 && resultCode == 0) { //添加页面传回的
+        // if (requestCode == 0 && resultCode == 0) { //添加页面传回的
             initData(follower_id, user_id);
-        }
+        // }
 
         // if (requestCode == 1 && resultCode == 0) {//可以不要?
         //     // Bundle bundle = data.getExtras();

@@ -45,7 +45,7 @@ public class TraceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ViewHolder itemHolder = (ViewHolder) holder;
         // Trace t = traceList.get(position);
         itemHolder.tvTopLine.setVisibility(View.VISIBLE);
-        //     第一行头的竖线不显示
+        // 第一行头的竖线不显示
         // itemHolder.tvTopLine.setVisibility(View.INVISIBLE);
         // 字体颜色加深
         itemHolder.tvAcceptTime.setTextColor(0xff555555);
@@ -101,8 +101,6 @@ public class TraceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             //     Drawable drawable = loadImageFromNetwork(trace.getAcceptPic());
             //     @Override
             //     public void run() {
-            //
-            //         // post() 特别关键，就是到UI主线程去更新图片
             //         tvAcceptPic.post(new Runnable(){
             //             @Override
             //             public void run() {
@@ -120,8 +118,7 @@ public class TraceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         }
 
-        private class DownloadImageTask extends AsyncTask<String, Void, Drawable>
-        {
+        private class DownloadImageTask extends AsyncTask<String, Void, Drawable> {
 
             protected Drawable doInBackground(String... urls) {
                 return loadImageFromNetwork(urls[0]);
@@ -132,11 +129,10 @@ public class TraceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
         }
 
-        private Drawable loadImageFromNetwork(String imageUrl)
-        {
+        private Drawable loadImageFromNetwork(String imageUrl) {
             Drawable drawable = null;
             try {
-                // 可以在这里通过文件名来判断，是否本地有此图片
+                // 通过文件名来判断，是否本地有此图片
                 drawable = Drawable.createFromStream(
                         new URL(imageUrl).openStream(), "image.jpg");
             } catch (IOException e) {
