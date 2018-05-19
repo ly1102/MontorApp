@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal">-->
+        <!---->
+        <!--android:layout_marginTop="30dp"-->
+
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rlInfo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/ivHead_image"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="10dp"/>-->
+        <!--</RelativeLayout>-->
+
+
+        <RelativeLayout
+            android:id="@+id/rlTimeline"
+            android:layout_width="32dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTopLine"
+                android:layout_width="0.5dp"
+                android:layout_height="12dp"
+                android:layout_centerHorizontal="true"
+                android:background="#999" />
+
+            <TextView
+                android:id="@+id/tvDot"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_below="@id/tvTopLine"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/timelline_dot_normal" />
+
+            <TextView
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tvDot"
+                android:layout_centerHorizontal="true"
+                android:background="#999" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCenter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="6dp"
+            android:paddingRight="10dp"
+            android:paddingTop="6dp">
+
+            <TextView
+                android:id="@+id/tvAcceptTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2014/06/24 20:55:28"
+                android:textColor="#999"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvAcceptContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAcceptTime"
+                android:layout_marginTop="5dp"
+                android:text="占个位"
+                android:textColor="#999"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/ivPic"
+                android:layout_width="201dp"
+                android:layout_height="105dp"
+                android:layout_below="@id/tvAcceptContent"
+                android:layout_marginTop="3dp"
+                android:padding="2dp"
+                android:src="@drawable/i1" />
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivPic2"-->
+                <!--android:layout_width="105dp"-->
+                <!--android:layout_height="105dp"-->
+                <!--android:layout_below="@id/tvAcceptStation"-->
+                <!--android:layout_marginTop="3dp"-->
+                <!--android:layout_toRightOf="@+id/ivPic1"-->
+                <!--android:padding="2dp"-->
+                <!--android:src="@drawable/i1" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivPic3"-->
+                <!--android:layout_width="105dp"-->
+                <!--android:layout_height="105dp"-->
+                <!--android:layout_below="@id/tvAcceptStation"-->
+                <!--android:layout_marginTop="3dp"-->
+                <!--android:layout_toRightOf="@+id/ivPic2"-->
+                <!--android:padding="2dp"-->
+                <!--android:src="@drawable/i1" />-->
+        </RelativeLayout>
+    <!--</RelativeLayout>-->
+</LinearLayout>
