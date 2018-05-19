@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#33b5f2"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="关注人信息" />
+
+    <TextView
+        android:id="@+id/namelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:text="姓名:"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/namelabel"
+        android:layout_alignBottom="@+id/namelabel"
+        android:layout_toEndOf="@+id/namelabel"
+        android:hint="在此输入姓名"
+        android:textSize="18dp" />
+
+    <TextView
+
+        android:id="@+id/genderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/namelabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="性别:"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <RadioGroup
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/genderLabel"
+        android:layout_below="@+id/namelabel"
+        android:layout_toEndOf="@+id/genderLabel"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男" />
+
+        <RadioButton
+            android:id="@+id/woman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_marginBottom="5dp"
+        android:id="@+id/identifyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/genderLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="身份证:"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <android.support.design.widget.TextInputEditText
+
+        android:layout_marginBottom="5dp"
+        android:id="@+id/identify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/identifyLabel"
+        android:layout_alignBottom="@+id/identifyLabel"
+        android:layout_toEndOf="@+id/identifyLabel"
+        android:hint="在此输入身份证"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_marginBottom="5dp"
+        android:id="@+id/qqLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/identifyLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="QQ:"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/qq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_alignBaseline="@+id/qqLabel"
+        android:layout_alignBottom="@+id/qqLabel"
+        android:layout_toEndOf="@+id/qqLabel"
+        android:hint="在此输入QQ"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/wechatLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/qqLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="微信:"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/wechat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_alignBaseline="@+id/wechatLabel"
+        android:layout_alignBottom="@+id/wechatLabel"
+        android:layout_toEndOf="@+id/wechatLabel"
+        android:hint="在此输入微信"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/phoneLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wechatLabel"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="电话:"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/phoneLabel"
+        android:layout_alignBottom="@+id/phoneLabel"
+        android:layout_toEndOf="@+id/phoneLabel"
+        android:hint="在此输入电话号码"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phoneLabel"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="邮箱:"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/emailLabel"
+        android:layout_alignBottom="@+id/emailLabel"
+        android:layout_toEndOf="@+id/emailLabel"
+        android:hint="在此输入邮箱"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#2a3"
+        android:text="提交"
+        android:textColor="#eee"
+        android:textSize="18sp" />
+
+</RelativeLayout>

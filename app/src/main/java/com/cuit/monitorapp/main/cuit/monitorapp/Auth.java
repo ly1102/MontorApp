@@ -2,6 +2,7 @@ package com.cuit.monitorapp.main.cuit.monitorapp;
 
 import android.app.Application;
 
+
 /**
  * Created by syche on 2018/5/18.
  */
@@ -9,7 +10,6 @@ import android.app.Application;
 public class Auth extends Application {
     private String objectId;
     private String mac;
-
     public String getObjectId() {
         return objectId;
     }
