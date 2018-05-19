@@ -701,7 +701,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 message.what = 2;
                 handler.sendMessage(message);
                 if (e == null) {
-                    pic1_url = avFile.getUrl();
+                    pic2_url = avFile.getUrl();
                     status2 = true;
                     Log.i("success save", "done: save pic2 success!");
                 } else {
@@ -733,7 +733,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 message.what = 3;
                 handler.sendMessage(message);
                 if (e == null) {
-                    pic1_url = avFile.getUrl();
+                    pic3_url = avFile.getUrl();
                     status3 = true;
                     Log.i("success save", "done: save pic3 success!");
                 } else {
@@ -764,7 +764,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 message.what = 4;
                 handler.sendMessage(message);
                 if (e == null) {
-                    pic1_url = avFile0.getUrl();
+                    video_pic_url = avFile0.getUrl();
                     status4 = true;
                     Log.i("success save", "done: save video pic success!");
                 } else {
@@ -793,7 +793,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 public void done(AVException e) {
                     Message message = new Message();
                     if (e == null) {
-                        pic1_url = avFile.getUrl();
+                        video_url = avFile.getUrl();
                         status5 = true;
                         message.what = -1;
                         handler.sendMessage(message);
