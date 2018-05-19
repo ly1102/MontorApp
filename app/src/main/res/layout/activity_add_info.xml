@@ -16,7 +16,8 @@
             android:id="@+id/about_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Animation.AppCompat.Tooltip">
+            android:theme="@style/Animation.AppCompat.Tooltip"
+            >
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/about_toolbar"
@@ -73,13 +74,14 @@
                 android:inputType="textMultiLine"
                 android:maxHeight="80dp"
                 android:minHeight="60dp"
-                android:textColor="#aefaee"
+                android:textColor="#000"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
@@ -103,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="点击下方按钮拍照上传" />
+                    android:text="拍照上传" />
 
                 <Button
                     android:id="@+id/local_choose_btn"
@@ -123,13 +125,14 @@
 
                 <ImageView
                     android:id="@+id/img"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:contentDescription="点击拍照"
                     android:minHeight="80dp"
                     android:minWidth="60dp"
-                    app:srcCompat="@mipmap/add"/>
+                    app:srcCompat="@mipmap/add"
+                    android:contentDescription="点击拍照"
+                    />
             </LinearLayout>
 
         </LinearLayout>
@@ -138,34 +141,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="选择视频上传" />
+                android:text="上传视频"
+                android:textSize="18dp"
+                android:textColor="#000"/>
             <Button
                 android:id="@+id/video_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击选择视频上传"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
-            <ImageView
-                android:id="@+id/video_view"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="80dp"
-                android:maxWidth="100dp"
-                app:srcCompat="@mipmap/add"
-                android:adjustViewBounds="true"
-                />
+                android:orientation="horizontal">
+                <ImageView
+                    android:onClick="choose_video"
+                    android:id="@+id/video_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="80dp"
+                    android:minWidth="60dp"
+                    android:maxHeight="180dp"
+                    app:srcCompat="@mipmap/add"
+                    android:contentDescription="视频封面展示"
+                    android:adjustViewBounds="true"/>
+            </LinearLayout>
+
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -181,23 +196,49 @@
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/gps_btn"
+                android:id="@+id/locate_btn"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
                 android:text="使用本机当前经纬度" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="经度"
+                    android:textColor="#888"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="纬度"
+                    android:textColor="#888"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/edit_longitude"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
                     android:layout_marginEnd="5sp"
                     android:layout_marginStart="5sp"
                     android:layout_weight="1"
@@ -209,8 +250,12 @@
                     android:textColor="#000" />
 
                 <EditText
+                    android:id="@+id/edit_latitude"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
                     android:layout_marginEnd="5sp"
                     android:layout_marginStart="5sp"
                     android:layout_weight="1"
@@ -225,7 +270,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/submit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10sp"
